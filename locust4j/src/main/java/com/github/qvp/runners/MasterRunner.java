@@ -1,7 +1,6 @@
 package com.github.qvp.runners;
 
 import java.io.IOException;
-import java.lang.management.ManagementFactory;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -24,7 +23,6 @@ import com.github.qvp.message.Message;
 import com.github.qvp.rpc.Server;
 import com.github.qvp.stats.TracebackError;
 import com.github.qvp.utils.Utils;
-import com.sun.management.OperatingSystemMXBean;
 
 /**
  * A {@link MasterRunner} is a state machine that tells to the master, runs all tasks, collects test results
@@ -58,7 +56,7 @@ public class MasterRunner extends DistributedRunner {
 
 
     public void init() {
-        server = new Server(LocustConfig.masterHost, LocustConfig.masterPort);
+        server = new Server(LocustConfig.MasterHost, LocustConfig.MasterPort);
 
         this.executor.execute(new Receiver(this));
         this.executor.execute(new Heartbeat(this));
@@ -80,8 +78,8 @@ public class MasterRunner extends DistributedRunner {
             quit();
         });
 
-        if (LocustConfig.runTime > 0) {
-            this.executor.schedule(this::timeLimitStop, LocustConfig.runTime, TimeUnit.SECONDS);
+        if (LocustConfig.RunTime > 0) {
+            this.executor.schedule(this::timeLimitStop, LocustConfig.RunTime, TimeUnit.SECONDS);
         }
     }
 
@@ -166,7 +164,7 @@ public class MasterRunner extends DistributedRunner {
 
             for (WorkerNode client : clients.values()) {
                 try {
-                    logger.info("Sending stop message to client {}", client.id);
+                    logger.debug("Sending stop message to client {}", client.id);
 
                     server.send(new Message("stop", null, client.id));
                 } catch (IOException e) {
@@ -184,7 +182,7 @@ public class MasterRunner extends DistributedRunner {
         logger.info("Quitting...");
         for (WorkerNode client : clients.values()) {
             try {
-                logger.info("Sending quit message to client {}", client.id);
+                logger.debug("Sending quit message to client {}", client.id);
 
                 server.send(new Message("quit", null, client.id));
             } catch (IOException e) {
@@ -378,8 +376,6 @@ public class MasterRunner extends DistributedRunner {
 
         private final MasterRunner runner;
 
-        private final OperatingSystemMXBean osBean = getOsBean();
-
         private Heartbeat(MasterRunner runner) {
             this.runner = runner;
         }
@@ -420,14 +416,6 @@ public class MasterRunner extends DistributedRunner {
                 }
             }
         }
-
-        private double getCpuUsage() {
-            return osBean.getSystemCpuLoad() * 100;
-        }
-
-        private OperatingSystemMXBean getOsBean() {
-            return (OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
-        }
     }
 
 
@@ -436,7 +424,7 @@ public class MasterRunner extends DistributedRunner {
 
         try {
             this.server.close();
-            this.server = new Server(LocustConfig.masterHost, LocustConfig.masterPort);
+            this.server = new Server(LocustConfig.MasterHost, LocustConfig.MasterPort);
         } catch (Exception e) {
             logger.error("Temporary failure when resetting connection, will retry later.", e);
         }

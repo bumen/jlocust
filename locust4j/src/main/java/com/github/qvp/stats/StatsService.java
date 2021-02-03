@@ -136,6 +136,7 @@ public enum StatsService {
         runAllTasks(0);
 
         if (print) {
+            logger.info("Total report");
             printStats(false);
             printPercentileStats();
             printErrorReport();

@@ -46,7 +46,7 @@ public class LocustMaster {
      * @since 1.0.0
      */
     public synchronized void run() {
-        if (LocustConfig.workerCount <= 0) {
+        if (LocustConfig.WorkerCount <= 0) {
             throw new IllegalArgumentException("need set slave count");
         }
 
@@ -57,14 +57,14 @@ public class LocustMaster {
         Environment environment = new Environment();
 
         MasterRunner runner = environment
-                .create_master_runner(LocustConfig.masterHost, LocustConfig.masterPort);
+                .create_master_runner(LocustConfig.MasterHost, LocustConfig.MasterPort);
 
         int i = 0;
         int readyCount = runner.readyClientCount();
-        while (readyCount < LocustConfig.workerCount) {
+        while (readyCount < LocustConfig.WorkerCount) {
             if (i % 2 == 0) {
-                logger.info("Waiting for slaves to be ready, {} of {} connected", readyCount,
-                        LocustConfig.workerCount);
+                logger.info("Waiting for worker to be ready, {} of {} connected", readyCount,
+                        LocustConfig.WorkerCount);
             }
             i++;
             try {
@@ -78,7 +78,7 @@ public class LocustMaster {
 
         StatsService.INSTANCE.start(environment);
 
-        runner.startSpawning(LocustConfig.UserCount, LocustConfig.spawnRate);
+        runner.startSpawning(LocustConfig.UserCount, LocustConfig.SpawnRate);
 
         addShutdownHook(environment);
 

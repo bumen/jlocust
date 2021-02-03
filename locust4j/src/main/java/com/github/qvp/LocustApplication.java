@@ -7,9 +7,7 @@ package com.github.qvp;
 public class LocustApplication {
 
     public static void main(String[] args) {
-        LocustConfig.UserCount = 10;
-        LocustConfig.workerCount = 1;
-        LocustConfig.spawnRate = 1;
+        LocustConfig.load();
 
         LocustMaster.getInstance().run();
     }
