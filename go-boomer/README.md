@@ -24,3 +24,18 @@
      
 ### 测试
  * 运行mail.go，开始向master节点发送数据
+ 
+ 
+### 调式
+ * git clone 下载
+ * 设置GOPATH为  xxx/jlocust/go-boomer/.godeps
+ * 启动jlocust4j 项目
+ * 启动main.go
+    1. idea中启动
+    2. build main.go启动
+       - source gvp: 设置gopath 
+       - go build -o main_worker.out
+       - ./main_worker.out
+ 
+  
+ 
