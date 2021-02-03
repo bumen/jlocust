@@ -1,0 +1,32 @@
+# boomer
+git@github.com:myzhan/boomer.git boomer master
+# mq
+git@github.com:zeromq/gomq.git gomq master
+# event
+git@github.com:asaskevich/EventBus.git EventBus master
+# uuid
+git@github.com:google/uuid.git uuid v1.2.0
+# gopsutil
+git@github.com:shirou/gopsutil.git gopsutil v3.20.12
+# codec
+git@github.com:ugorji/go.git go v1.2.3
+# tablewriter
+git@github.com:olekukonko/tablewriter.git tablewriter v0.0.4
+# go-runewidth
+git@github.com:mattn/go-runewidth.git go-runewidth v0.0.10
+# wmi
+git@github.com:StackExchange/wmi.git wmi 1.1.0
+# go-ole
+git@github.com:go-ole/go-ole.git go-ole v1.2.5
+# uniseg
+git@github.com:rivo/uniseg.git uniseg v0.2.0
+# sys
+git@github.com:golang/sys.git golang.org/x/sys release-branch.go.1.15 true
+#
+git@github.com:stretchr/testify.git testify v1.7.0
+#
+git@github.com:davecgh/go-spew.git go-spew v1.1.1
+#
+git@github.com:pmezard/go-difflib.git go-difflib v1.0.0
+#
+git@github.com:go-yaml/yaml.git gopkg.in/yaml.v3 v3 true
