@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="info" monitorInterval="60" shutdownHook="disable">
+       <Appenders>
+         <Console name="Console" target="SYSTEM_OUT">
+           <PatternLayout pattern="%d [%-5p][%t] %m%n"/>
+         </Console>
+       </Appenders>
+       <Loggers>
+         <Logger name="com.github.locust" level="debug"/>
+         <Root level="info">
+           <AppenderRef ref="Console"/>
+         </Root>
+       </Loggers>
+
+</Configuration>
