@@ -6,7 +6,7 @@
          </Console>
        </Appenders>
        <Loggers>
-         <Logger name="com.github.locust" level="debug"/>
+         <Logger name="com.github.qvp" level="debug"/>
          <Root level="info">
            <AppenderRef ref="Console"/>
          </Root>
