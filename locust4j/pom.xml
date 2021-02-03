@@ -7,6 +7,8 @@
     <groupId>com.github.qvp</groupId>
     <artifactId>locust4j</artifactId>
     <version>1.0.0</version>
+    <packaging>jar</packaging>
+
     <name>locust4j</name>
 
 
@@ -76,7 +78,7 @@
                 </includes>
             </resource>
             <resource>
-                <directory>src/main/benchmark</directory>
+                <directory>src/test</directory>
                 <excludes>
                     <exclude>**/*.java</exclude>
                 </excludes>

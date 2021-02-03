@@ -1,4 +1,4 @@
-package com.github.qvp.locust4j.utils;
+package com.github.qvp;
 
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.runner.Runner;
