@@ -45,5 +45,6 @@ public class Server extends BaseSocket {
         this.socket.sendMore(message.getNodeID());
         this.socket.send(bytes, ZMQ.DONTWAIT);
     }
+
 }
 

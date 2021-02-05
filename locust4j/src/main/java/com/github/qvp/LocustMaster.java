@@ -108,6 +108,7 @@ public class LocustMaster {
 
         StatsService.INSTANCE.stop();
 
+
         // print_stats(runner.stats, current=False)
         // print_percentile_stats(runner.stats)
         // print_error_report(runner.stats)
@@ -117,6 +118,14 @@ public class LocustMaster {
      * when JVM is shutting down, send a quit message to master, then master will remove this slave from its list.
      */
     private void addShutdownHook(Environment environment) {
+        environment.events.shutdown.add_listener((event)->{
+            Thread t = new Thread(()->{
+                LocustMaster.getInstance().shutdown(environment);
+            });
+            t.setDaemon(true);
+            t.start();
+        });
+
         Runtime.getRuntime().addShutdownHook(new Thread() {
             @Override
             public void run() {

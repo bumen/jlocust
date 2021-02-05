@@ -5,6 +5,10 @@ BZBINDIR="$(cd "${BZBIN}"; pwd)"
 LOGCFG=config/log4j2-test.xml
 
 #
+case "`uname`" in
+    CYGWIN*|MINGW*) cygwin=true ;;
+    *) cygwin=false ;;
+esac
 
 if $cygwin
 then
@@ -23,15 +27,9 @@ mkdir -p "$LOGHOME"
 fi
 
 
-if $cygwin
-then
-    LOG_DIR=`cygpath -wp "$LOG_DIR"`
-    BZCFGDIR=`cygpath -wp "$BZCFGDIR"`
-fi
-
 JVM_MODULES="--add-opens java.base/jdk.internal.misc=ALL-UNNAMED"
 
-JVM_ARGS="-Dlogging.path=${LOGHOME} -Dlog4j.configurationFile=${LOGFILE}"
+JVM_ARGS="-Dlogging.path=${LOGHOME} -Dlog4j.configurationFile=${LOGCFG}"
 
 
 

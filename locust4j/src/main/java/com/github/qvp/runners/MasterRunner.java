@@ -191,11 +191,12 @@ public class MasterRunner extends DistributedRunner {
         }
 
         try {
-            Thread.sleep(500);
+            Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
+        server.close();
         executor.shutdownNow();
     }
 
@@ -306,6 +307,7 @@ public class MasterRunner extends DistributedRunner {
                     if (getWorkerCount() - getWorkerCount(STATE_MISSING) <= 0) {
                         logger.info("The last worker quit, stopping test.");
                         this.stop();
+                        environment.events.shutdown.fire(ArgEvent.build(null));
                     }
                 }
             } else if ("exception".equals(type)) {
@@ -360,6 +362,10 @@ public class MasterRunner extends DistributedRunner {
                     runner.connectionBroken = false;
                     runner.onMessage(message);
                 } catch (Exception ex) {
+                    if (runner.state == STATE_STOPPED) {
+                        break;
+                    }
+
                     logger.error("RPCError found when receiving from client", ex);
                     runner.connectionBroken = true;
                     try {

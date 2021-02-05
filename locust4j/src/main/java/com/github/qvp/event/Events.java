@@ -22,6 +22,8 @@ public class Events {
     public final EventHook test_stop = new EventHook();
     public final EventHook reset_stats = new EventHook();
 
+    public final EventHook shutdown = new EventHook();
+
 
     public static class EventHook {
         private List<EventHandler> handlers;
